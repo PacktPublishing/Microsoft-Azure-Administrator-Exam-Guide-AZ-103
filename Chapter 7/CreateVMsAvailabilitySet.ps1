@@ -1,8 +1,8 @@
 ﻿#First, we need to login to the Azure account:
-Login-AzureRmAccount
+Connect-AzAccount
 
 #If necessary, select the right subscription:
-Select-AzureRmSubscription -SubscriptionId "********-****-****-****-***********"
+Select-AzSubscription -SubscriptionId "********-****-****-****-***********"
 
 #Create a resource group for the Availability Set:
 New-AzResourceGroup -Name PacktVMResourceGroup -Location EastUS

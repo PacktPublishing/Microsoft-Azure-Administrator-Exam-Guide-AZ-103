@@ -1,0 +1,19 @@
+{
+    "Name": "Packt Custom Role",
+    "Id": null,
+    "IsCustom": true,
+    "Description": "Allows for read access to Azure Storage, Network and Compute resources and access to support",
+    "Actions": [
+        "Microsoft.Compute/*/read",
+        "Microsoft.Storage/*/read",
+        "Microsoft.Network/*/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Support/*"
+    ],
+    "NotActions": [
+    ],
+    "AssignableScopes": [
+    "/subscriptions/********-****-****-****-***********",
+    "/subscriptions/********-****-****-****-***********"
+    ]
+}
