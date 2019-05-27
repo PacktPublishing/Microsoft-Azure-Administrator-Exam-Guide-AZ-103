@@ -13,26 +13,30 @@ New-AzResourceGroup -Name PacktRecoveryServicesGroup -Location EastUS
 New-AzRecoveryServicesVault -Name PacktFileVault -ResourceGroupName PacktRecoveryServicesGroup -Location EastUS
 
 #You can now set the type of redundancy to use for the vault storage:
-$vault1 = Get-AzRecoveryServicesVault `
-    -Name PacktFileVault `
-    | Set-AzRecoveryServicesVaultContext 
+$vault1 = Get-AzRecoveryServicesVault -Name PacktFileVault `
     
 Set-AzRecoveryServicesBackupProperties -Vault $vault1 `
     -BackupStorageRedundancy GeoRedundant
 
+
+#store the vault ID in a variable and use it to create the policy
+$vaultID = Get-AzRecoveryServicesVault `
+    -ResourceGroupName PacktRecoveryServicesGroup `
+    -Name PacktFileVault `
+    | select -ExpandProperty ID 
+
 #Create a new backup policy 
 $packtSchPol = Get-AzRecoveryServicesBackupSchedulePolicyObject -WorkloadType "AzureFiles"
 $packtRetPol = Get-AzRecoveryServicesBackupRetentionPolicyObject -WorkloadType "AzureFiles"
-New-AzRecoveryServicesBackupProtectionPolicy `
-    -Name "PacktFSPolicy" `
+$afsPol = New-AzRecoveryServicesBackupProtectionPolicy -Name "PacktFSPolicy" `
     -WorkloadType "AzureFiles" `
     -RetentionPolicy $packtRetPol `
-    -SchedulePolicy $packtSchPol
-
-#Store the policy in a variable
-$afsPol =  Get-AzRecoveryServicesBackupProtectionPolicy -Name "PacktFSPolicy"
+    -SchedulePolicy $packtSchPol `
+    -VaultId $vaultID `
+    -BackupManagementType AzureStorage
 
 #Enable the backup and apply the policy
-Enable-AzRecoveryServicesBackupProtection -StorageAccountName "packtfileshare" `
-    -Name "PacktFSPolicy" `
-    -Policy $afsPol
+Enable-AzRecoveryServicesBackupProtection -VaultId $vaultID `
+    -Policy $afsPol `
+    -Name "azurefileshare" `
+    -StorageAccountName "packtfileshare" 
