@@ -2,9 +2,7 @@
 Connect-AzAccount
 
 #If necessary, select the right subscription:
-#Select-AzSubscription -SubscriptionId "********-****-****-****-***********"
-
-Select-AzSubscription -SubscriptionId "ca463175-6884-42be-8c17-f5f1abe5a5b0"
+Select-AzSubscription -SubscriptionId "********-****-****-****-***********"
 
 #Create a resource group for the Recovery Services Vault:
 New-AzResourceGroup -Name PacktRecoveryServicesGroup -Location EastUS
@@ -13,7 +11,7 @@ New-AzResourceGroup -Name PacktRecoveryServicesGroup -Location EastUS
 New-AzRecoveryServicesVault -Name PacktFileVault -ResourceGroupName PacktRecoveryServicesGroup -Location EastUS
 
 #You can now set the type of redundancy to use for the vault storage:
-$vault1 = Get-AzRecoveryServicesVault -Name PacktFileVault `
+$vault1 = Get-AzRecoveryServicesVault -Name PacktFileVault
     
 Set-AzRecoveryServicesBackupProperties -Vault $vault1 `
     -BackupStorageRedundancy GeoRedundant
@@ -38,5 +36,45 @@ $afsPol = New-AzRecoveryServicesBackupProtectionPolicy -Name "PacktFSPolicy" `
 #Enable the backup and apply the policy
 Enable-AzRecoveryServicesBackupProtection -VaultId $vaultID `
     -Policy $afsPol `
-    -Name "azurefileshare" `
-    -StorageAccountName "packtfileshare" 
+    -Name "packtfileshare" `
+    -StorageAccountName "packtfileshare"
+
+#Schedule an on-demand job
+#Retrieve the backup container:
+$afsPacktContainer = Get-AzRecoveryServicesBackupContainer -FriendlyName "packtfileshare" `
+    -ContainerType AzureStorage `
+    -VaultId $vaultID
+
+#Retrieve the backup item from the container
+$afsPacktBackupItem = Get-AzRecoveryServicesBackupItem `
+    -Container $afsPacktContainer `
+    -WorkloadType "AzureFiles" `
+    -Name "packtfileshare" `
+    -VaultId $vaultID
+
+#Schedule the job
+$job = Backup-AzRecoveryServicesBackupItem -Item $afsPacktBackupItem `
+    -VaultId $vaultID
+
+
+#Create a list of recovery points
+$startDate = (Get-Date).AddDays(-7)
+$endDate = Get-Date
+$rp = Get-AzRecoveryServicesBackupRecoveryPoint -Item $afsPacktBackupItem `
+    -StartDate $startdate.ToUniversalTime() `
+    -EndDate $enddate.ToUniversalTime() `
+    -VaultId $vaultID
+
+$rp[0] | fl
+
+#Set Vault context
+Get-AzRecoveryServicesVault -Name "PacktFileVault" | Set-AzRecoveryServicesVaultContext
+
+#Restore backup to the original location
+Restore-AzRecoveryServicesBackupItem `
+    -RecoveryPoint $rp[0] `
+    -TargetStorageAccountName "packtfileshare" `
+    -TargetFileShareName "packtfileshare" `
+    -TargetFolder "AzureFS_restored" `
+    -ResolveConflict Overwrite
+   
