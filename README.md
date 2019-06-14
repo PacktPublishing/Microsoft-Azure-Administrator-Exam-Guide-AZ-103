@@ -16,7 +16,7 @@ Microsoft Azure Administrator – Exam Guide AZ-103 will cover all the exam obje
 * Protect your data with Azure Site Recovery 
  
 
-If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1-838-82902-4) today!
+If you feel this book is for you, get your [copy](https://www.amazon.com/dp/1838829024) today!
 
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
@@ -47,9 +47,9 @@ With the following software and hardware list you can run all code files present
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781838829025_ColorImages.pdf).
 
 ### Related products
-* Hands-On Cloud Administration in Azure  [[Packt]](https://www.packtpub.com/in/virtualization-and-cloud/hands-cloud-administration-azure?utm_source=github&utm_medium=repository&utm_campaign=9781789134964) [[Amazon]](https://www.amazon.com/dp/1-789-13496-X)
+* Hands-On Cloud Administration in Azure  [[Packt]](https://www.packtpub.com/in/virtualization-and-cloud/hands-cloud-administration-azure?utm_source=github&utm_medium=repository&utm_campaign=9781789134964) [[Amazon]](https://www.amazon.com/dp/178913496X)
 
-* Hands-On Linux Administration on Azure  [[Packt]](https://www.packtpub.com/in/virtualization-and-cloud/hands-linux-administration-azure?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1-789-13096-4)
+* Hands-On Linux Administration on Azure  [[Packt]](https://www.packtpub.com/in/virtualization-and-cloud/hands-linux-administration-azure?utm_source=github&utm_medium=repository&utm_campaign=) [[Amazon]](https://www.amazon.com/dp/1789130964)
 
 
 ## Get to Know the Author
