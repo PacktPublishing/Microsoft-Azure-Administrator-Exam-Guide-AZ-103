@@ -1,3 +1,7 @@
+## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/B14606?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
+-----
+For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
+
 # Microsoft Azure Administrator – Exam Guide AZ-103 
 
 <a href="https://www.packtpub.com/in/networking-and-servers/microsoft-azure-administrator-exam-guide-az-103?utm_source=github&utm_medium=repository&utm_campaign=9781838829025"><img src="https://www.packtpub.com/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/b/1/b14606.png" alt="Microsoft Azure Administrator – Exam Guide AZ-103 " height="256px" align="right"></a>
